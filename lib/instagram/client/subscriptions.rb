@@ -18,8 +18,8 @@ module Instagram
       # @rate_limited true
       # @see https://api.instagram.com/developer/realtime/
       def subscriptions(options={})
-        response = get("subscriptions", options.merge(:client_secret => client_secret))
-        response
+        response = get("subscriptions", options)#get("subscriptions", options.merge(:client_secret => client_secret))
+        response["data"]
       end
 
       # Creates a real-time subscription
@@ -63,8 +63,8 @@ module Instagram
           o[:callback_url] = callback_url unless callback_url.nil?
           o[:aspect] = aspect || o[:aspect] || "media"
         }
-        response = post("subscriptions", options.merge(:client_secret => client_secret))
-        response
+        response = post("subscriptions", options)#post("subscriptions", options.merge(:client_secret => client_secret))
+        response["data"]
       end
 
       # Deletes a real-time subscription
@@ -92,8 +92,8 @@ module Instagram
         options = args.last.is_a?(Hash) ? args.pop : {}
         subscription_id = args.first
         options.merge!(:id => subscription_id) if subscription_id
-        response = delete("subscriptions", options.merge(:client_secret => client_secret))
-        response
+        response = delete("subscriptions", options)#delete("subscriptions", options.merge(:client_secret => client_secret))
+        response["data"]
       end
 
       # Process a subscription notification JSON payload
